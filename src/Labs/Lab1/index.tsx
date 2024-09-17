@@ -307,21 +307,10 @@ _Starship-gap2.jpg"
         <br />
       </div>
       <h4>Anchor tag</h4>
-      Please
-      <a id="wd-lipsum" href="https://www.lipsum.com">
-        click here
-      </a>
-      to get dummy text
+      Please <a id="wd-lipsum" href="https://www.lipsum.com">click here</a> to get dummy text
       <br />
       <h4>My anchor tag</h4>
-      Click{" "}
-      <a
-        id="wd-github"
-        href="https://github.com/darrenqchen/kanbas-react-web-app"
-      >
-        here
-      </a>
-      to go to my github project
+      Click <a id="wd-github" href="https://github.com/darrenqchen/kanbas-react-web-app">here</a> to go to my github project
     </div>
   );
 }
