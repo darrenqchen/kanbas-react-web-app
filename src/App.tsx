@@ -5,6 +5,7 @@ import "./App.css";
 import { Hash } from "crypto";
 import Lab1 from "./Labs/Lab1";
 import Lab2 from "./Labs/Lab2";
+import Kanbas from "./Kanbas";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="Labs" />} />
           <Route path="/Labs/*" element={<Labs />} />
+          <Route path="/Kanbas/*" element={<Kanbas />} />
         </Routes>
       </div>
     </HashRouter>
