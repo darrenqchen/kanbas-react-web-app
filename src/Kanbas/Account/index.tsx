@@ -9,7 +9,6 @@ import { Routes, Route, Navigate } from "react-router";
 export default function Account() {
     return (
         <div id="wd-account-screen">
-            <h2>Account</h2>
             <table>
                 <tr>
                     <td valign="top">
