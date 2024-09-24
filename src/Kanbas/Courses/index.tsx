@@ -20,10 +20,7 @@ export default function Courses() {
               <Route path="Home" element={<Home />} />
               <Route path="Modules" element={<Modules />} />
               <Route path="Assignments" element={<h2>Assignments</h2>} />
-              <Route
-                path="Assignments/:aid"
-                element={<h2>Assignment Editor</h2>}
-              />
+              <Route path="Assignments/:aid" element={<h2>Assignment Editor</h2>} />
               <Route path="People" element={<h2>People</h2>} />
             </Routes>
           </td>
