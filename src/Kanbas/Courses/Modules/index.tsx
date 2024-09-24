@@ -1,10 +1,14 @@
 import React from "react";
-import ModuleOptions from "./ModuleOptions";
 
 export default function Modules() {
   return (
     <div>
-      <ModuleOptions />
+      <button>Collapse All</button>&nbsp;
+      <button>View Progress</button>&nbsp;
+      <select name="wd-publish">
+          <option value="Publish All">Publish All</option>
+      </select>&nbsp;
+      <button>+ Module</button>&nbsp;
       <ul id="wd-modules">
         <li className="wd-module">
           <div className="wd-title">Week 1, Lecture 1 - Course Introduction, Syllabus, Agenda</div>
