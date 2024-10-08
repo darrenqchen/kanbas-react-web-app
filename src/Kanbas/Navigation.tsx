@@ -36,12 +36,12 @@ export default function KanbasNavigation() {
         <Link to="/Kanbas/Inbox" id="wd-inbox-link"
           className="list-group-item text-white
                      bg-black text-center border-0">
-          <FaInbox className="fs-1 text-danger" /><br/>
+          <FaInbox className="fs-1 text-danger mb-1" /><br/>
           Inbox </Link>
         <Link to="/Labs" id="wd-labs-link"
           className="list-group-item text-white
                      bg-black text-center border-0">
-          <LiaCogSolid className="fs-1 text-danger" /><br/>
+          <LiaCogSolid className="fs-1 text-danger mb-1" /><br/>
           Labs </Link>
       </div>
   );}
