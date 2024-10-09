@@ -5,7 +5,7 @@ export default function LessonControlButtons() {
   return (
     <div className="float-end">
       <GreenCheckmark />
-      <BsPlus />
+      <BsPlus className="fs-3"/>
       <IoEllipsisVertical className="fs-4" />
     </div>
   );
