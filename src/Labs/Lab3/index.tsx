@@ -3,7 +3,6 @@ import AddingAndRemovingToFromArrays from "./AddingAndRemovingToFromArrays";
 import ArrowFunctions from "./ArrowFunctions";
 import BooleanVariables from "./BooleanVariables";
 import Classes from "./Classes";
-import ConditionalOutputInline from "./ConditionalOutputIfElse";
 import Destructing from "./Destructing";
 import DestructingImports from "./DestructingImports";
 import FilterFunction from "./FilterFunction";
@@ -30,6 +29,9 @@ import VariablesAndConstants from "./VariablesAndConstants";
 import VariableTypes from "./VariableTypes";
 import AddPathParameters from "./AddPathParameters";
 import PathParameters from "./PathParameters";
+import ConditionalOutputIfElse from "./ConditionalOutputIfElse";
+import ConditionalOutputInline from "./ConditionalOutputInline";
+import ArrayIndexAndLength from "./ArrayIndexAndLength";
 
 export default function Lab3() {
     console.log("Hello World!")
@@ -41,12 +43,14 @@ export default function Lab3() {
             <BooleanVariables />
             <IfElse />
             <TernaryOperator />
+            <ConditionalOutputIfElse />
             <ConditionalOutputInline />
             <LegacyFunctions />
             <ArrowFunctions />
             <ImpliedReturn />
             <TemplateLiterals />
             <SimpleArrays />
+            <ArrayIndexAndLength />
             <AddingAndRemovingToFromArrays />
             <ForLoops />
             <MapFunction />
