@@ -1,4 +1,3 @@
-import { courses } from "../Database";
 import React from "react";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
@@ -10,7 +9,7 @@ import PeopleTable from "./People/Table";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { FaAlignJustify } from "react-icons/fa";
 
-export default function Courses() {
+export default function Courses({ courses }: { courses: any[]; }) {
     const { cid } = useParams();
     const { pathname } = useLocation();
     const course = courses.find((course) => course._id === cid);

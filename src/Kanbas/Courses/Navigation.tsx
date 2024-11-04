@@ -10,7 +10,7 @@ export default function CoursesNavigation() {
             {links.map((link) => (
                 <Link id={`wd-course-${link.toLowerCase()}-link`} to={`/Kanbas/Courses/${cid}/${link}`}
                     className={`list-group-item text-danger border border-0
-                        ${pathname.includes(link) ? "active" : "text-danger"}`}> {link} </Link>
+                        ${pathname.includes(link) ? "active text-dark" : "text-danger"}`}> {link} </Link>
             ))}
         </div>
     )
