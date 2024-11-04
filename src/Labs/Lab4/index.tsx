@@ -8,6 +8,7 @@ import ObjectStateVariable from "./ObjectStateVariable";
 import ParentStateComponent from "./ParentStateComponent";
 import PassingDataOnEvent from "./PassingDataOnEvent";
 import PassingFunctions from "./PassingFunctions";
+import ReduxExamples from "./ReduxExamples";
 import StringStateVariables from "./StringStateVariables";
 
 export default function () {
@@ -29,6 +30,7 @@ export default function () {
             <ObjectStateVariable />
             <ArrayStateVariable />
             <ParentStateComponent />
+            <ReduxExamples />
         </div>
     );
 }
