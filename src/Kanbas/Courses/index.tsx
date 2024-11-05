@@ -1,4 +1,3 @@
-import React from "react";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Modules from "./Modules";
@@ -6,7 +5,6 @@ import Home from "./Home";
 import CoursesNavigation from "./Navigation";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import PeopleTable from "./People/Table";
-import { HiOutlineBars3 } from "react-icons/hi2";
 import { FaAlignJustify } from "react-icons/fa";
 
 export default function Courses({ courses }: { courses: any[]; }) {
