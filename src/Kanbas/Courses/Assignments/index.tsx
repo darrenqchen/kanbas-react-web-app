@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { FaPlus, FaTrash } from "react-icons/fa";
-import ProtectedButtons from "../../ProtectedButtons";
 import { useState } from "react";
 import { deleteAssignment } from "./reducer";
+import ProtectedRole from "../../ProtectedRole";
 
 export default function Assignments() {
     const { cid } = useParams();
@@ -34,7 +34,7 @@ export default function Assignments() {
                         />
                     </div>
                 </div>
-                <ProtectedButtons>
+                <ProtectedRole role="FACULTY">
                     <div className="col-6">
                         <Link to={`/Kanbas/Courses/${cid}/Assignments/new`}>
                             <button id="wd-add-assignment" className="btn btn-lg btn-danger me-1 float-end">
@@ -47,7 +47,7 @@ export default function Assignments() {
                             Group
                         </button>
                     </div>
-                </ProtectedButtons>
+                </ProtectedRole>
             </div>
 
             <ul id="wd-assignments" className="list-group rounded-0">
@@ -87,14 +87,14 @@ export default function Assignments() {
                                         </div>
                                         <div className="col-1">
                                             <LessonControlButtons />
-                                            <ProtectedButtons>
+                                            <ProtectedRole role="FACULTY">
                                                 <FaTrash
                                                     className="text-danger me-2 mt-1 float-end"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#wd-delete-assignment-dialog"
                                                     onClick={() => setDeleteAid(assignment._id)}
                                                 />
-                                            </ProtectedButtons>
+                                            </ProtectedRole>
                                         </div>
                                     </div>
                                 </li>

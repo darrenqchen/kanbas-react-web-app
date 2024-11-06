@@ -1,6 +1,6 @@
 import { IoEllipsisVertical } from "react-icons/io5";
 import GreenCheckmark from "./GreenCheckmark";
-import ProtectedButtons from "../../ProtectedButtons";
+import ProtectedButtons from "../../ProtectedRole";
 import { FaTrash } from "react-icons/fa";
 export default function LessonControlButtons() {
     return (

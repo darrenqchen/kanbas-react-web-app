@@ -1,7 +1,7 @@
 import { FaPlus } from "react-icons/fa6";
 import GreenCheckmark from "./GreenCheckmark";
 import ModuleEditor from "./ModuleEditor";
-import ProtectedButtons from "../../ProtectedButtons";
+import ProtectedRole from "../../ProtectedRole";
 export default function ModulesControls({
     moduleName,
     setModuleName,
@@ -13,7 +13,7 @@ export default function ModulesControls({
 }) {
     return (
         <div id="wd-modules-controls" className="text-nowrap">
-            <ProtectedButtons>
+            <ProtectedRole role="FACULTY">
                 <button
                     id="wd-add-module-btn"
                     className="btn btn-lg btn-danger me-1 float-end"
@@ -58,7 +58,7 @@ export default function ModulesControls({
                         </li>
                     </ul>
                 </div>
-            </ProtectedButtons>
+            </ProtectedRole>
             <button id="wd-view-progress" className="btn btn-lg btn-secondary me-1 float-end">
                 View Progress
             </button>

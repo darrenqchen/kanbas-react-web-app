@@ -7,7 +7,8 @@ import { useParams } from "react-router";
 import * as db from "../../Database";
 import { addModule, editModule, updateModule, deleteModule } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
-import ProtectedButtons from "../../ProtectedButtons";
+import ProtectedButtons from "../../ProtectedRole";
+import ProtectedRole from "../../ProtectedRole";
 
 export default function Modules() {
     const { cid } = useParams();
@@ -47,22 +48,22 @@ export default function Modules() {
                                         defaultValue={module.name}
                                     />
                                 )}
-                                <ProtectedButtons>
+                                <ProtectedRole role="FACULTY">
                                     <ModuleControlButtons
                                         moduleId={module._id}
                                         deleteModule={(moduleId) => dispatch(deleteModule(moduleId))}
                                         editModule={(moduleId) => dispatch(editModule(moduleId))}
                                     />
-                                </ProtectedButtons>
+                                </ProtectedRole>
                             </div>
                             {module.lessons && (
                                 <ul className="wd-lessons list-group rounded-0">
                                     {module.lessons.map((lesson: any) => (
                                         <li className="wd-lesson list-group-item p-3 ps-1">
                                             <BsGripVertical className="me-2 fs-3" /> {lesson.name}{" "}
-                                            <ProtectedButtons>
+                                            <ProtectedRole role="FACULTY">
                                                 <LessonControlButtons />
-                                            </ProtectedButtons>
+                                            </ProtectedRole>
                                         </li>
                                     ))}
                                 </ul>

@@ -1,7 +1,7 @@
 import { FaPlus } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
-import ProtectedButtons from "../../ProtectedButtons";
 import { Link, useLocation, useParams } from "react-router-dom";
+import ProtectedRole from "../../ProtectedRole";
 
 export default function AssignmentsControls() {
     return (
@@ -21,7 +21,7 @@ export default function AssignmentsControls() {
                         />
                     </div>
                 </div>
-                <ProtectedButtons>
+                <ProtectedRole role="FACULTY">
                     <div className="col-6">
                         <Link to="./new">
                             <button id="wd-add-assignment" className="btn btn-lg btn-danger me-1 float-end">
@@ -34,7 +34,7 @@ export default function AssignmentsControls() {
                             Group
                         </button>
                     </div>
-                </ProtectedButtons>
+                </ProtectedRole>
             </div>
         </div>
     );
