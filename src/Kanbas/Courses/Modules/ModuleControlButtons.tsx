@@ -3,7 +3,7 @@ import { FaPencil } from "react-icons/fa6";
 import { IoEllipsisVertical } from "react-icons/io5";
 import GreenCheckmark from "./GreenCheckmark";
 import { BsPlus } from "react-icons/bs";
-export default function LessonControlButtons({
+export default function ModuleControlButtons({
     moduleId,
     deleteModule,
     editModule,

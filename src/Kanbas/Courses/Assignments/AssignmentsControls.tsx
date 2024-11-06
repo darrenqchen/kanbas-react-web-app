@@ -1,6 +1,7 @@
 import { FaPlus } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import ProtectedButtons from "../../ProtectedButtons";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 export default function AssignmentsControls() {
     return (
@@ -22,10 +23,12 @@ export default function AssignmentsControls() {
                 </div>
                 <ProtectedButtons>
                     <div className="col-6">
-                        <button id="wd-add-assignment" className="btn btn-lg btn-danger me-1 float-end">
-                            <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-                            Assignment
-                        </button>
+                        <Link to="./new">
+                            <button id="wd-add-assignment" className="btn btn-lg btn-danger me-1 float-end">
+                                <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+                                Assignment
+                            </button>
+                        </Link>
                         <button id="wd-add-assignment-group" className="btn btn-lg btn-secondary me-1 float-end">
                             <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                             Group
