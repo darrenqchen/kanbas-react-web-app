@@ -3,6 +3,9 @@ import * as db from "../../Database";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addAssignment, updateAssignment } from "./reducer";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
+import { createAssignmentForCourse } from '../client';
 
 export default function AssignmentEditor() {
     
@@ -35,7 +38,7 @@ export default function AssignmentEditor() {
         setAvailableUntilDate(assignment.availableUntilDate);
     }
 
-    function handleSave() {
+    async function handleSave() {
         const assignment = {
             _id,
             title,
@@ -48,8 +51,10 @@ export default function AssignmentEditor() {
         };
         if (isNew) {
             assignment.course = cid!;
+            await coursesClient.createAssignmentForCourse(cid!, assignment);
             dispatch(addAssignment(assignment));
         } else {
+            await assignmentsClient.updateAssignment(assignment);
             dispatch(updateAssignment(assignment));
         }
         navigate(`/Kanbas/Courses/${cid}/Assignments`);

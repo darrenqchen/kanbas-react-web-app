@@ -7,15 +7,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { FaPlus, FaTrash } from "react-icons/fa";
-import { useState } from "react";
-import { deleteAssignment } from "./reducer";
+import { useEffect, useState } from "react";
+import { addAssignment, deleteAssignment, setAssignments } from "./reducer";
 import ProtectedRole from "../../ProtectedRole";
+import * as coursesClient from "../client";
 
 export default function Assignments() {
+    const [deleteAid, setDeleteAid] = useState("");
     const { cid } = useParams();
     const { assignments } = useSelector((state: any) => state.assignmentsReducer);
     const dispatch = useDispatch();
-    const [deleteAid, setDeleteAid] = useState("");
+    const fetchAssignments = async () => {
+        const assignments = await coursesClient.findAssignmentsForCourse(cid as string);
+        dispatch(setAssignments(assignments));
+    };
+    useEffect(() => {
+        fetchAssignments();
+    }, []);
 
     return (
         <div id="wd-assignments">
@@ -64,41 +72,39 @@ export default function Assignments() {
                     </div>
 
                     <ul id="wd-assignment-list" className="list-group rounded-0">
-                        {assignments
-                            .filter((assignment: any) => assignment.course === cid)
-                            .map((assignment: any) => (
-                                <li className="wd-assigment-list-item list-group-item p-3 ps-1">
-                                    <div className="row">
-                                        <div className="col-1">
-                                            <BsGripVertical className="me-1 fs-3" />
-                                            <GiNotebook className="text-success fs-4" />
-                                        </div>
-                                        <div className="col">
-                                            <h4>
-                                                <Link
-                                                    className="wd-assignment-link text-reset text-decoration-none"
-                                                    to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
-                                                    {assignment.title}
-                                                </Link>
-                                            </h4>
-                                            <span className="text-danger">Multiple Modules</span> |{" "}
-                                            <b>Not available until</b> {assignment.availableFromDate} | <b>Due</b>{" "}
-                                            {assignment.dueDate} | {assignment.points} pts
-                                        </div>
-                                        <div className="col-1">
-                                            <LessonControlButtons />
-                                            <ProtectedRole role="FACULTY">
-                                                <FaTrash
-                                                    className="text-danger me-2 mt-1 float-end"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#wd-delete-assignment-dialog"
-                                                    onClick={() => setDeleteAid(assignment._id)}
-                                                />
-                                            </ProtectedRole>
-                                        </div>
+                        {assignments.map((assignment: any) => (
+                            <li className="wd-assigment-list-item list-group-item p-3 ps-1">
+                                <div className="row">
+                                    <div className="col-1">
+                                        <BsGripVertical className="me-1 fs-3" />
+                                        <GiNotebook className="text-success fs-4" />
                                     </div>
-                                </li>
-                            ))}
+                                    <div className="col">
+                                        <h4>
+                                            <Link
+                                                className="wd-assignment-link text-reset text-decoration-none"
+                                                to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+                                                {assignment.title}
+                                            </Link>
+                                        </h4>
+                                        <span className="text-danger">Multiple Modules</span> |{" "}
+                                        <b>Not available until</b> {assignment.availableFromDate} | <b>Due</b>{" "}
+                                        {assignment.dueDate} | {assignment.points} pts
+                                    </div>
+                                    <div className="col-1">
+                                        <LessonControlButtons />
+                                        <ProtectedRole role="FACULTY">
+                                            <FaTrash
+                                                className="text-danger me-2 mt-1 float-end"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#wd-delete-assignment-dialog"
+                                                onClick={() => setDeleteAid(assignment._id)}
+                                            />
+                                        </ProtectedRole>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
                     </ul>
                 </li>
             </ul>
@@ -116,9 +122,7 @@ export default function Assignments() {
                             </h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
                         </div>
-                        <div className="modal-body">
-                            {/* <p>Are you sure you want to remove this assignment?</p> */}
-                        </div>
+                        <div className="modal-body" />
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
                                 Cancel{" "}
