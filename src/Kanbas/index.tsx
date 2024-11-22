@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import ProtectedRoute from "./Account/ProtectedRoute";
 import Session from "./Account/Session";
 import * as userClient from "./Account/client";
+import * as courseClient from "./Courses/client";
 import { useSelector } from "react-redux";
 
 export default function Kanbas() {
@@ -33,9 +34,9 @@ export default function Kanbas() {
     useEffect(() => {
         fetchCourses();
     }, [currentUser]);
-
-    const addNewCourse = () => {
-        setCourses([...courses, { ...course, _id: new Date().getTime().toString() }]);
+    const addNewCourse = async () => {
+        const newCourse = await userClient.createCourse(course);
+        setCourses([...courses, newCourse]);
     };
     const deleteCourse = (courseId: any) => {
         setCourses(courses.filter((course) => course._id !== courseId));
@@ -51,6 +52,18 @@ export default function Kanbas() {
             })
         );
     };
+    // TODO: Do I need this part?
+    const findAllCourses = async () => {
+        try {
+            const allCourses = await courseClient.fetchAllCourses();
+            setCourses([allCourses]);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        findAllCourses();
+    });
 
     return (
         <Session>
