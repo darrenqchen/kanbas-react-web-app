@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as db from "../Database";
 import ProtectedRole from "../ProtectedRole";
 import { addEnrollment, deleteEnrollment } from "./reducer";
 
@@ -86,12 +85,6 @@ export default function Dashboard({
             <div id="wd-dashboard-courses" className="row">
                 <div className="row row-cols-1 row-cols-md-5 g-4">
                     {courses
-                        // .filter((course) =>
-                        //     enrollments.some(
-                        //         (enrollment: { user: string; course: string }) =>
-                        //             enrollment.user === currentUser._id && enrollment.course === course._id
-                        //     )
-                        // )
                         .map((course) => {
                             if (!showAll && !isEnrolled(course._id)) {
                                 return "";
