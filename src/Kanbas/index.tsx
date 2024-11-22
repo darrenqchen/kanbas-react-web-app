@@ -25,8 +25,10 @@ export default function Kanbas() {
     const { currentUser } = useSelector((state: any) => state.accountReducer);
     const fetchCourses = async () => {
         try {
-            const courses = await userClient.findMyCourses();
-            setCourses(courses);
+            if (currentUser) {
+                const courses = await userClient.findMyCourses();
+                setCourses(courses);
+            }
         } catch (error) {
             console.error(error);
         }
@@ -38,7 +40,8 @@ export default function Kanbas() {
         const newCourse = await userClient.createCourse(course);
         setCourses([...courses, newCourse]);
     };
-    const deleteCourse = (courseId: any) => {
+    const deleteCourse = async (courseId: any) => {
+        const status = await courseClient.deleteCourse(courseId);
         setCourses(courses.filter((course) => course._id !== courseId));
     };
     const updateCourse = () => {
@@ -52,18 +55,18 @@ export default function Kanbas() {
             })
         );
     };
-    // TODO: Do I need this part?
-    const findAllCourses = async () => {
-        try {
-            const allCourses = await courseClient.fetchAllCourses();
-            setCourses([allCourses]);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    useEffect(() => {
-        findAllCourses();
-    });
+    // // TODO: Do I need this part?
+    // const findAllCourses = async () => {
+    //     try {
+    //         const allCourses = await courseClient.fetchAllCourses();
+    //         setCourses([allCourses]);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
+    // useEffect(() => {
+    //     findAllCourses();
+    // });
 
     return (
         <Session>
