@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRole from "../ProtectedRole";
-import { addEnrollment, deleteEnrollment } from "./reducer";
+import { addEnrollment, deleteEnrollment, setEnrollments } from "./reducer";
+import * as enrollmentsClient from "./client";
 
 export default function Dashboard({
     courses,
+    allCourses,
     course,
     setCourse,
     addNewCourse,
@@ -13,6 +15,7 @@ export default function Dashboard({
     updateCourse,
 }: {
     courses: any[];
+    allCourses: any[];
     course: any;
     setCourse: (course: any) => void;
     addNewCourse: () => void;
@@ -23,19 +26,30 @@ export default function Dashboard({
     const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
     const [showAll, setShowAll] = useState(false);
     const dispatch = useDispatch();
-
-    const enroll = (courseId: String) => {
-        dispatch(addEnrollment({ user: currentUser._id, course: courseId }));
+    const fetchEnrollments = async () => {
+        const enrollments = await enrollmentsClient.findEnrollmentsForUser(currentUser._id);
+        dispatch(setEnrollments(enrollments));
+        console.log(`ENROLLMENTS:`)
+        for (const enrollment of enrollments) {
+            console.log(enrollment);
+        }
     };
-    const unenroll = (courseId: String) => {
-        dispatch(
-            deleteEnrollment(
-                enrollments.find(
-                    (enrollment: { user: string; course: string }) =>
-                        enrollment.user === currentUser._id && enrollment.course === courseId
-                )
-            )
+    useEffect(() => {
+        fetchEnrollments();
+    }, []);
+
+    const enroll = async (courseId: String) => {
+        var newEnrollment = { user: currentUser._id, course: courseId };
+        newEnrollment = await enrollmentsClient.enrollUserInCourse(currentUser._id, courseId);
+        dispatch(addEnrollment(newEnrollment));
+    };
+    const unenroll = async (courseId: String) => {
+        const enrollmentId = enrollments.find(
+            (enrollment: { user: string; course: string }) =>
+                enrollment.user === currentUser._id && enrollment.course === courseId
         );
+        await enrollmentsClient.deleteEnrollment(enrollmentId);
+        dispatch(deleteEnrollment(enrollmentId));
     };
     const isEnrolled = (courseId: String) => {
         const ret = enrollments.filter(
@@ -84,14 +98,12 @@ export default function Dashboard({
                 <br />
                 <hr />
             </ProtectedRole>
-            <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
+            <h2 id="wd-dashboard-published">Published Courses ({enrollments.length})</h2> <hr />
             <div id="wd-dashboard-courses" className="row">
                 <div className="row row-cols-1 row-cols-md-5 g-4">
-                    {courses.map(
-                        (course) => {
-                            // if (!showAll && !isEnrolled(course._id)) {
-                            //     return "";
-                            // } else {
+                    {allCourses
+                        .filter((course) => (showAll ? true : isEnrolled(course._id)))
+                        .map((course) => {
                             return (
                                 <div className="wd-dashboard-course col" style={{ width: "300px" }}>
                                     <div className="card rounded-3 overflow-hidden">
@@ -157,9 +169,7 @@ export default function Dashboard({
                                     </div>
                                 </div>
                             );
-                        }
-                        // }
-                    )}
+                        })}
                 </div>
             </div>
         </div>

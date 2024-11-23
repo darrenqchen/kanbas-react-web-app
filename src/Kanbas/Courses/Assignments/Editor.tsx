@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import * as db from "../../Database";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addAssignment, updateAssignment } from "./reducer";
 import * as coursesClient from "../client";
 import * as assignmentsClient from "./client";
-import { createAssignmentForCourse } from '../client';
 
 export default function AssignmentEditor() {
     

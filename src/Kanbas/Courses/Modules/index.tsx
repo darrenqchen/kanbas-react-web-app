@@ -8,9 +8,7 @@ import { addModule, editModule, updateModule, deleteModule, setModules } from ".
 import { useSelector, useDispatch } from "react-redux";
 import ProtectedRole from "../../ProtectedRole";
 import * as coursesClient from "../client";
-
 import * as modulesClient from "./client";
-import { ModuleKind } from "typescript";
 
 export default function Modules() {
     const { cid } = useParams();

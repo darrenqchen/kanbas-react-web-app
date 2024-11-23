@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 
 export default function Kanbas() {
     const [courses, setCourses] = useState<any[]>([]);
+    const [allCourses, setAllCourses] = useState<any[]>([]);
     const [course, setCourse] = useState<any>({
         _id: "1234",
         name: "New Course",
@@ -28,6 +29,8 @@ export default function Kanbas() {
             if (currentUser) {
                 const courses = await userClient.findMyCourses();
                 setCourses(courses);
+                const allCourses = await courseClient.fetchAllCourses();
+                setAllCourses(allCourses);
             }
         } catch (error) {
             console.error(error);
@@ -41,7 +44,7 @@ export default function Kanbas() {
         setCourses([...courses, newCourse]);
     };
     const deleteCourse = async (courseId: any) => {
-        const status = await courseClient.deleteCourse(courseId);
+        await courseClient.deleteCourse(courseId);
         setCourses(courses.filter((course) => course._id !== courseId));
     };
     const updateCourse = async () => {
@@ -56,18 +59,6 @@ export default function Kanbas() {
             })
         );
     };
-    // // TODO: Do I need this part?
-    // const findAllCourses = async () => {
-    //     try {
-    //         const allCourses = await courseClient.fetchAllCourses();
-    //         setCourses([allCourses]);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
-    // useEffect(() => {
-    //     findAllCourses();
-    // });
 
     return (
         <Session>
@@ -83,6 +74,7 @@ export default function Kanbas() {
                                 <ProtectedRoute>
                                     <Dashboard
                                         courses={courses}
+                                        allCourses={allCourses}
                                         course={course}
                                         setCourse={setCourse}
                                         addNewCourse={addNewCourse}

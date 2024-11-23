@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { addAssignment, deleteAssignment, setAssignments } from "./reducer";
+import { deleteAssignment, setAssignments } from "./reducer";
 import ProtectedRole from "../../ProtectedRole";
 import * as coursesClient from "../client";
 
