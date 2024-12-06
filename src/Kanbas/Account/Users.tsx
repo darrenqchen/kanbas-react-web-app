@@ -62,11 +62,11 @@ export default function Users() {
                 value={role}
                 onChange={(e) => filterUsersByRole(e.target.value)}
                 className="form-select float-start w-25 wd-select-role">
-                {/* <option value="">All Roles</option> */}
+                <option value="">All Roles</option>
                 <option value="STUDENT">Students</option>
-                <option value="TA">TA</option>
+                <option value="TA">TAs</option>
                 <option value="FACULTY">Faculty</option>
-                <option value="ADMIN">Admin</option>
+                <option value="ADMIN">Admins</option>
             </select>
             <PeopleTable users={users} />
         </div>
